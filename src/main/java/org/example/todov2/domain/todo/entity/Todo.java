@@ -52,4 +52,9 @@ public class Todo extends BaseEntity {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+
+	public void update(String title, String contents) {
+		this.title = title;
+		this.contents = contents;
+	}
 }

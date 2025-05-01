@@ -8,6 +8,7 @@ import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 import org.example.todov2.domain.todo.entity.Todo;
 import org.example.todov2.domain.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,5 +26,12 @@ public class TodoServiceImpl implements TodoService {
 		todo.setMember(findMember);
 		Todo savedTodo = todoRepository.save(todo);
 		return new TodoResponseDto(savedTodo.getId(), savedTodo.getTitle(), savedTodo.getContents(), savedTodo.getMember());
+	}
+
+	@Override
+	@Transactional
+	public void updateTodo(Long memberId, String title, String contents) {
+		Todo findTodo = todoRepository.findTodoByIdOrElseThrow(memberId);
+		findTodo.update(title, contents);
 	}
 }

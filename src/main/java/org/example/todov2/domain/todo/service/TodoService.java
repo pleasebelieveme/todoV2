@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TodoService {
 	TodoResponseDto save(SaveTodoRequestDto dto, Member member);
+	void updateTodo(Long memberId, String title, String contents);
 }

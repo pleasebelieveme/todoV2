@@ -3,10 +3,12 @@ package org.example.todov2.domain.todo.controller;
 import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
 import org.example.todov2.domain.todo.dto.request.SaveTodoRequestDto;
+import org.example.todov2.domain.todo.dto.request.UpdateTodoRequestDto;
 import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 import org.example.todov2.domain.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,5 +32,11 @@ public class TodoController {
 		Member member = memberRepository.findMemberByIdOrElseThrow(memberId);
 		TodoResponseDto TodoResponseDto = todoService.save(dto, member);
 		return new ResponseEntity<>(TodoResponseDto, HttpStatus.CREATED);
+	}
+
+	@PatchMapping("/{memberId}")
+	public ResponseEntity<Void> updateTodo(@PathVariable Long memberId, @RequestBody UpdateTodoRequestDto dto) {
+		todoService.updateTodo(memberId, dto.getTitle(), dto.getContents());
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
