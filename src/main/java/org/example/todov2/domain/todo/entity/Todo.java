@@ -2,6 +2,7 @@ package org.example.todov2.domain.todo.entity;
 
 import org.example.todov2.common.BaseEntity;
 import org.example.todov2.domain.member.entity.Member;
+import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,15 +41,10 @@ public class Todo extends BaseEntity {
 		this.member = member;
 	}
 
-	// public TodoResponseDto toDto() {
-	// 	return new TodoResponseDto(this.id, this.title, this.contents, this.member);
-	// }
-	//
-	// public void update(String title, String contents) {
-	// 	this.title = title;
-	// 	this.contents = contents;
-	// }
-	//
+	public TodoResponseDto toDto() {
+		return new TodoResponseDto(this.id, this.title, this.contents, this.member);
+	}
+
 	public void setMember(Member member) {
 		this.member = member;
 	}

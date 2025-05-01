@@ -1,5 +1,7 @@
 package org.example.todov2.domain.todo.controller;
 
+import java.util.List;
+
 import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
 import org.example.todov2.domain.todo.dto.request.SaveTodoRequestDto;
@@ -9,6 +11,7 @@ import org.example.todov2.domain.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +36,11 @@ public class TodoController {
 		Member member = memberRepository.findMemberByIdOrElseThrow(memberId);
 		TodoResponseDto TodoResponseDto = todoService.save(dto, member);
 		return new ResponseEntity<>(TodoResponseDto, HttpStatus.CREATED);
+	}
+
+	@GetMapping
+	public List<TodoResponseDto> findAll() {
+		return todoService.findAllTodos();
 	}
 
 	@PatchMapping("/{memberId}")

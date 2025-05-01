@@ -1,5 +1,8 @@
 package org.example.todov2.domain.todo.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.example.todov2.domain.member.dto.request.SaveMemberRequestDto;
 import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
@@ -26,6 +29,12 @@ public class TodoServiceImpl implements TodoService {
 		todo.setMember(findMember);
 		Todo savedTodo = todoRepository.save(todo);
 		return new TodoResponseDto(savedTodo.getId(), savedTodo.getTitle(), savedTodo.getContents(), savedTodo.getMember());
+	}
+
+	@Override
+	public List<TodoResponseDto> findAllTodos() {
+		List<Todo> todoList = todoRepository.findAll();
+		return todoList.stream().map(Todo::toDto).collect(Collectors.toList());
 	}
 
 	@Override
