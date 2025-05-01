@@ -1,12 +1,15 @@
 package org.example.todov2.domain.todo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
 import org.example.todov2.domain.todo.dto.request.SaveTodoRequestDto;
 import org.example.todov2.domain.todo.dto.request.UpdateTodoRequestDto;
 import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
+import org.example.todov2.domain.todo.entity.Todo;
+import org.example.todov2.domain.todo.repository.TodoRepository;
 import org.example.todov2.domain.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +34,7 @@ public class TodoController {
 
 	private final TodoService todoService;
 	private final MemberRepository memberRepository;
+	private final TodoRepository todoRepository;
 
 	@PostMapping("/{memberId}")
 	public ResponseEntity<TodoResponseDto> saveTodo(@PathVariable Long memberId, @RequestBody SaveTodoRequestDto dto) {
@@ -41,6 +46,11 @@ public class TodoController {
 	@GetMapping
 	public List<TodoResponseDto> findAll() {
 		return todoService.findAllTodos();
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<TodoResponseDto> findTodoById(@PathVariable Long id) {
+		return new ResponseEntity<>(todoService.findTodoById(id), HttpStatus.OK);
 	}
 
 	@PatchMapping("/{memberId}")

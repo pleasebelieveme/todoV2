@@ -1,6 +1,7 @@
 package org.example.todov2.domain.todo.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.example.todov2.domain.member.dto.request.SaveMemberRequestDto;
@@ -10,8 +11,10 @@ import org.example.todov2.domain.todo.dto.request.SaveTodoRequestDto;
 import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 import org.example.todov2.domain.todo.entity.Todo;
 import org.example.todov2.domain.todo.repository.TodoRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,6 +38,12 @@ public class TodoServiceImpl implements TodoService {
 	public List<TodoResponseDto> findAllTodos() {
 		List<Todo> todoList = todoRepository.findAll();
 		return todoList.stream().map(Todo::toDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public TodoResponseDto findTodoById(Long todoId) {
+		Todo findTodo = todoRepository.findTodoByIdOrElseThrow(todoId);
+		return new TodoResponseDto(findTodo.getId(), findTodo.getTitle(), findTodo.getContents(), findTodo.getMember(), findTodo.getCreatedAt(), findTodo.getModifiedAt());
 	}
 
 	@Override
