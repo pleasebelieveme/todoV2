@@ -8,6 +8,7 @@ import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 import org.example.todov2.domain.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,12 @@ public class TodoController {
 	@PatchMapping("/{memberId}")
 	public ResponseEntity<Void> updateTodo(@PathVariable Long memberId, @RequestBody UpdateTodoRequestDto dto) {
 		todoService.updateTodo(memberId, dto.getTitle(), dto.getContents());
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{todoId}")
+	public ResponseEntity<Void> delete(@PathVariable Long todoId) {
+		todoService.delete(todoId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

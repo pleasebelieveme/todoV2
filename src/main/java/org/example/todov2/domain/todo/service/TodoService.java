@@ -10,4 +10,5 @@ import org.springframework.stereotype.Service;
 public interface TodoService {
 	TodoResponseDto save(SaveTodoRequestDto dto, Member member);
 	void updateTodo(Long memberId, String title, String contents);
+	void delete(Long todoId);
 }
