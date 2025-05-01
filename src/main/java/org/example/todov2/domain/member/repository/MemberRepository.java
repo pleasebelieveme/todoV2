@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-	default Member findByIdOrElseThrow(Long id) {
-		return findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id));
+	default Member findMemberByIdOrElseThrow(Long memberId) {
+		return findById(memberId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + memberId));
 	}
 }
