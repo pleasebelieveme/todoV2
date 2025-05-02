@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.example.todov2.domain.member.dto.request.SaveMemberRequestDto;
+import org.example.todov2.domain.member.dto.response.MemberResponseDto;
 import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
 import org.example.todov2.domain.todo.dto.request.SaveTodoRequestDto;
@@ -28,10 +29,16 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public TodoResponseDto save(SaveTodoRequestDto dto, Member member) {
 		Member findMember = memberRepository.findMemberByIdOrElseThrow(member.getId());
-		Todo todo = new Todo(dto.getTitle(), dto.getContents(), member);
-		todo.setMember(findMember);
+		Todo todo = new Todo(dto.getTitle(), dto.getContents(), findMember);
 		Todo savedTodo = todoRepository.save(todo);
-		return new TodoResponseDto(savedTodo.getId(), savedTodo.getTitle(), savedTodo.getContents(), savedTodo.getMember());
+		return new TodoResponseDto(savedTodo.getId(),
+			savedTodo.getTitle(),
+			savedTodo.getContents(),
+			new MemberResponseDto(
+				savedTodo.getMember().getId(),
+				savedTodo.getMember().getName(),
+				savedTodo.getMember().getEmail()
+			));
 	}
 
 	@Override
@@ -43,7 +50,7 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public TodoResponseDto findTodoById(Long todoId) {
 		Todo findTodo = todoRepository.findTodoByIdOrElseThrow(todoId);
-		return new TodoResponseDto(findTodo.getId(), findTodo.getTitle(), findTodo.getContents(), findTodo.getMember(), findTodo.getCreatedAt(), findTodo.getModifiedAt());
+		return new TodoResponseDto(findTodo.getId(), findTodo.getTitle(), findTodo.getContents(), findTodo.toDto().getMember(), findTodo.getCreatedAt(), findTodo.getModifiedAt());
 	}
 
 	@Override

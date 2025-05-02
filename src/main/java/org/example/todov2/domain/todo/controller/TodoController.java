@@ -48,9 +48,9 @@ public class TodoController {
 		return todoService.findAllTodos();
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<TodoResponseDto> findTodoById(@PathVariable Long id) {
-		return new ResponseEntity<>(todoService.findTodoById(id), HttpStatus.OK);
+	@GetMapping("/{todoId}")
+	public ResponseEntity<TodoResponseDto> findTodoById(@PathVariable Long todoId) {
+		return new ResponseEntity<>(todoService.findTodoById(todoId), HttpStatus.OK);
 	}
 
 	@PatchMapping("/{memberId}")
