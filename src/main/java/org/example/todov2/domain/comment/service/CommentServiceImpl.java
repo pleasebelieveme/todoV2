@@ -9,6 +9,7 @@ import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
 import org.example.todov2.domain.comment.repository.CommentRepository;
 import org.example.todov2.domain.todo.entity.Todo;
 import org.example.todov2.domain.todo.repository.TodoRepository;
+import org.springframework.data.convert.DtoInstantiatingConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,5 +43,14 @@ public class CommentServiceImpl implements CommentService {
 		Member findMember = memberRepository.findMemberByIdOrElseThrow(findComment.getMember().getId());
 
 		findComment.updateComment(dto.getContents());
+	}
+
+	@Override
+	public void deleteComment(Long commentId) {
+		Comment findComment = commentRepository.findCommentByIdOrElseThrow(commentId);
+		Todo findTodo = todoRepository.findTodoByIdOrElseThrow(findComment.getTodo().getId());
+		Member findMember = memberRepository.findMemberByIdOrElseThrow(findComment.getMember().getId());
+
+		commentRepository.delete(findComment);
 	}
 }

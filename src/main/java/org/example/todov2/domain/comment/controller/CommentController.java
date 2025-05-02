@@ -6,6 +6,7 @@ import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
 import org.example.todov2.domain.comment.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,12 @@ public class CommentController {
 		@PathVariable Long commentId
 	) {
 		commentService.updateComment(dto, commentId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/todos/comments/{commentId}")
+	public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
+		commentService.deleteComment(commentId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

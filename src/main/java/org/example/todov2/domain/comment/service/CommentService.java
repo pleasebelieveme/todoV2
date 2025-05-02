@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 public interface CommentService {
 	CommentResponseDto saveComment(SaveCommentRequestDto dto, Long todosId);
 	void updateComment(UpdateCommentRequestDto dto, Long commentId);
+	void deleteComment(Long commentId);
 }
