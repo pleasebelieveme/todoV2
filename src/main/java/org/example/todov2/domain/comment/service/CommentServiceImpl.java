@@ -1,5 +1,8 @@
 package org.example.todov2.domain.comment.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.example.todov2.domain.comment.dto.request.UpdateCommentRequestDto;
 import org.example.todov2.domain.comment.entity.Comment;
 import org.example.todov2.domain.member.entity.Member;
@@ -33,6 +36,12 @@ public class CommentServiceImpl implements CommentService {
 		Comment CommentToSave = dto.toEntity(findMember, findTodo);
 		Comment saved = commentRepository.save(comment);
 		return CommentResponseDto.toDto(saved);
+	}
+
+	@Override
+	public List<CommentResponseDto> findAllComment() {
+		List<Comment> findCommentList = commentRepository.findAll();
+		return findCommentList.stream().map(CommentResponseDto::toDto).collect(Collectors.toList());
 	}
 
 	@Override
