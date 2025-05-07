@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-	default Comment findCommentByIdOrElseThrow(Long reviewId) {
-		return findById(reviewId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + reviewId));
+	default Comment findCommentByIdOrElseThrow(Long commentId) {
+		return findById(commentId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + commentId));
 	}
 }

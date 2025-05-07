@@ -23,16 +23,14 @@ public class CommentResponseDto {
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;
 
-	public CommentResponseDto(Long id, String contents, MemberResponseDto member, List<TodoResponseDto> todos,
-		TodoResponseDto todo) {
+	public CommentResponseDto(Long id, String contents, MemberResponseDto member, TodoResponseDto todo) {
 		this.id = id;
 		this.contents = contents;
 		this.member = member;
 		this.todo = todo;
 	}
 
-	public CommentResponseDto(Long id, String contents, MemberResponseDto member, TodoResponseDto todo,
-		LocalDateTime createdAt, LocalDateTime modifiedAt) {
+	public CommentResponseDto(Long id, String contents, MemberResponseDto member, TodoResponseDto todo, LocalDateTime createdAt, LocalDateTime modifiedAt) {
 		this.id = id;
 		this.contents = contents;
 		this.member = member;
@@ -46,9 +44,8 @@ public class CommentResponseDto {
 		return CommentResponseDto.builder()
 			.id(comment.getId())
 			.contents(comment.getContents())
-			.member(new MemberResponseDto(comment.getMember().getId(), comment.getMember().getName(), comment.getMember().getEmail()))
-			.todo(new TodoResponseDto(comment.getTodo().getId(), comment.getTodo().getTitle(), comment.getTodo().getContents(), comment.getTodo().toDto().getMember()))
+			.member(MemberResponseDto.toDto(comment.getMember()))
+			.todo(TodoResponseDto.toDto(comment.getTodo()))
 			.build();
-
 	}
 }

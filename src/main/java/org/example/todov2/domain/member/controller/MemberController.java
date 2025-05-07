@@ -2,7 +2,7 @@ package org.example.todov2.domain.member.controller;
 
 import org.example.todov2.domain.member.dto.request.SaveMemberRequestDto;
 import org.example.todov2.domain.member.dto.response.MemberResponseDto;
-import org.example.todov2.domain.member.dto.service.MemberService;
+import org.example.todov2.domain.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

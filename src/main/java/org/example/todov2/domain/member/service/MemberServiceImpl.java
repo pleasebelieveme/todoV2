@@ -1,4 +1,4 @@
-package org.example.todov2.domain.member.dto.service;
+package org.example.todov2.domain.member.service;
 
 import org.example.todov2.domain.member.dto.request.SaveMemberRequestDto;
 import org.example.todov2.domain.member.dto.response.MemberResponseDto;
@@ -6,7 +6,6 @@ import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service

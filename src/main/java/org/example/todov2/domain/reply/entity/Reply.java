@@ -1,17 +1,10 @@
-package org.example.todov2.domain.comment.entity;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.example.todov2.domain.reply.entity;
 
 import org.example.todov2.common.BaseEntity;
-import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
-import org.example.todov2.domain.member.dto.response.MemberResponseDto;
-import org.example.todov2.domain.reply.entity.Reply;
+import org.example.todov2.domain.comment.entity.Comment;
 import org.example.todov2.domain.member.entity.Member;
-import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 import org.example.todov2.domain.todo.entity.Todo;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,11 +22,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "comment")
+@Table(name = "reply")
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // JPA는 사용가능하지만, 외부에서 개발자가 직접 new로 못씀.
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class Comment extends BaseEntity {
+public class Reply extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,40 +43,18 @@ public class Comment extends BaseEntity {
 	@JoinColumn(name = "todo_id")
 	private Todo todo;
 
-	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
-	private List<Reply> replies = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "comment_id")
+	private Comment comment;
 
-	public Comment(String contents, Member member, Todo todo) {
+	public Reply(String contents, Member member, Todo todo, Comment comment) {
 		this.contents = contents;
 		this.member = member;
 		this.todo = todo;
+		this.comment = comment;
 	}
 
-	public CommentResponseDto toDto() {
-		return new CommentResponseDto(
-			this.id,
-			this.contents,
-			new MemberResponseDto(
-				this.member.getId(),
-				this.member.getName(),
-				this.member.getEmail()
-			),
-			new TodoResponseDto(
-				this.todo.getId(),
-				this.todo.getTitle(),
-				this.todo.getContents(),
-				new MemberResponseDto(
-					this.member.getId(),
-					this.member.getName(),
-					this.member.getEmail()
-				)));
-	}
-
-	public void updateReview(String contents) {
-		this.contents = contents;
-	}
-
-	public void updateComment(String contents) {
+	public void updateReply(String contents) {
 		this.contents = contents;
 	}
 }

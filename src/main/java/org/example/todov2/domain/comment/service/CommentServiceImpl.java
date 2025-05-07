@@ -30,10 +30,8 @@ public class CommentServiceImpl implements CommentService {
 	public CommentResponseDto saveComment(SaveCommentRequestDto dto, Long todosId) {
 		Todo findTodo = todoRepository.findTodoByIdOrElseThrow(todosId);
 		Member findMember = memberRepository.findMemberByIdOrElseThrow(findTodo.getMember().getId());
+
 		Comment comment = new Comment(dto.getContents(), findMember, findTodo);
-		comment.setMember(findMember);
-		comment.setTodo(findTodo);
-		Comment CommentToSave = dto.toEntity(findMember, findTodo);
 		Comment saved = commentRepository.save(comment);
 		return CommentResponseDto.toDto(saved);
 	}

@@ -40,11 +40,7 @@ public class TodoResponseDto {
 			todo.getId(),
 			todo.getTitle(),
 			todo.getContents(),
-			new MemberResponseDto(
-				todo.getMember().getId(),
-				todo.getMember().getName(),
-				todo.getMember().getEmail()
-			),
+			MemberResponseDto.toDto(todo.getMember()),
 			todo.getCreatedAt(),
 			todo.getModifiedAt()
 		);
