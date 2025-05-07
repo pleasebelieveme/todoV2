@@ -46,4 +46,11 @@ public class ReplyServiceImpl implements ReplyService {
 
 		findReply.updateReply(dto.getContents());
 	}
+
+	@Override
+	public void deleteReply(Long replyId) {
+		Reply findReply = replyRepository.findReplyByIdOrElseThrow(replyId);
+
+		replyRepository.delete(findReply);
+	}
 }

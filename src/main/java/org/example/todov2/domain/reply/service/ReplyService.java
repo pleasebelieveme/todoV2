@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 public interface ReplyService {
 	ReplyResponseDto saveReply(SaveReplyRequestDto dto, Long commentId);
 	void updateReply(UpdateReplyRequestDto dto, Long replyId);
+	void deleteReply(Long replyId);
 }
