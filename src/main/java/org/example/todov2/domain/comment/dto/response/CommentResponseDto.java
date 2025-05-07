@@ -12,19 +12,10 @@ import lombok.Getter;
 public class CommentResponseDto {
 	private final Long id;
 	private final String contents;
-	private LocalDateTime createdAt;
-	private LocalDateTime modifiedAt;
 
 	public CommentResponseDto(Long id, String contents, Object o) {
 		this.id = id;
 		this.contents = contents;
-	}
-
-	public CommentResponseDto(Long id, String contents, LocalDateTime createdAt, LocalDateTime modifiedAt) {
-		this.id = id;
-		this.contents = contents;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
 	}
 
 	public static CommentResponseDto toDto(Comment comment) {

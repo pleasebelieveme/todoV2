@@ -18,8 +18,6 @@ public class TodoResponseDto {
 	private final String contents;
 	private MemberResponseDto member;
 	private List<CommentResponseDto> comments;
-	private LocalDateTime createdAt;
-	private LocalDateTime modifiedAt;
 
 	public TodoResponseDto(Long id, String title, String contents, MemberResponseDto member, List<CommentResponseDto> comments) {
 		this.id = id;
@@ -29,15 +27,6 @@ public class TodoResponseDto {
 		this.comments = comments;
 	}
 
-	public TodoResponseDto(Long id, String title, String contents, MemberResponseDto member, List<CommentResponseDto> comments, LocalDateTime createdAt, LocalDateTime modifiedAt) {
-		this.id = id;
-		this.title = title;
-		this.contents = contents;
-		this.member = member;
-		this.comments = comments;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-	}
 
 	public static TodoResponseDto toDto(Todo todo) {
 		return new TodoResponseDto(
@@ -47,9 +36,7 @@ public class TodoResponseDto {
 			MemberResponseDto.toDto(todo.getMember()),
 			todo.getComments().stream()
 				.map(CommentResponseDto::toDto)
-				.collect(Collectors.toList()),
-			todo.getCreatedAt(),
-			todo.getModifiedAt()
+				.collect(Collectors.toList())
 		);
 	}
 }
