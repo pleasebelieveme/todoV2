@@ -1,14 +1,13 @@
 package org.example.todov2.domain.todo.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.example.todov2.domain.member.entity.Member;
 import org.example.todov2.domain.member.repository.MemberRepository;
 import org.example.todov2.domain.todo.dto.request.SaveTodoRequestDto;
 import org.example.todov2.domain.todo.dto.request.UpdateTodoRequestDto;
+import org.example.todov2.domain.todo.dto.response.TodoListResponseDto;
 import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
-import org.example.todov2.domain.todo.entity.Todo;
 import org.example.todov2.domain.todo.repository.TodoRepository;
 import org.example.todov2.domain.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
@@ -20,11 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -44,8 +40,9 @@ public class TodoController {
 	}
 
 	@GetMapping
-	public List<TodoResponseDto> findAll() {
-		return todoService.findAllTodos();
+	public TodoListResponseDto findAll() {
+		List<TodoResponseDto> findAllTodo = todoService.findAllTodos();
+		return new TodoListResponseDto(findAllTodo);
 	}
 
 	@GetMapping("/{todoId}")

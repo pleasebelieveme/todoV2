@@ -41,6 +41,8 @@ public class Todo extends BaseEntity {
 	@Column(columnDefinition = "longtext")
 	private String contents;
 
+	private int count;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
