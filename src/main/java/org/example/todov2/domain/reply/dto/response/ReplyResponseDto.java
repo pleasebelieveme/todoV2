@@ -15,8 +15,6 @@ public class ReplyResponseDto {
 
 	private final Long id;
 	private final String contents;
-	private final MemberResponseDto member;
-	private final TodoResponseDto todo;
 	private final CommentResponseDto comment;
 
 	public static ReplyResponseDto toDto(Reply reply) {
@@ -24,8 +22,6 @@ public class ReplyResponseDto {
 		return ReplyResponseDto.builder()
 			.id(reply.getId())
 			.contents(reply.getContents())
-			.member(MemberResponseDto.toDto(reply.getMember()))
-			.todo(TodoResponseDto.toDto(reply.getTodo()))
 			.comment(CommentResponseDto.toDto(reply.getComment()))
 			.build();
 	}

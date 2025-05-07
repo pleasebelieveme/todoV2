@@ -34,7 +34,7 @@ public class CommentController {
 	}
 
 	@GetMapping("/members/me/comments")
-	public ResponseEntity<List<CommentResponseDto>> findAllReviewsById() {
+	public ResponseEntity<List<CommentResponseDto>> findAllComment() {
 		List<CommentResponseDto> responseDtoList = commentService.findAllComment();
 		return new ResponseEntity<>(responseDtoList, HttpStatus.OK);
 	}

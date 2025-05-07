@@ -1,6 +1,9 @@
 package org.example.todov2.domain.reply.controller;
 
+import java.util.List;
+
 import org.example.todov2.domain.comment.dto.request.UpdateCommentRequestDto;
+import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
 import org.example.todov2.domain.reply.dto.request.SaveReplyRequestDto;
 import org.example.todov2.domain.reply.dto.request.UpdateReplyRequestDto;
 import org.example.todov2.domain.reply.dto.response.ReplyResponseDto;
@@ -8,6 +11,7 @@ import org.example.todov2.domain.reply.service.ReplyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +31,12 @@ public class ReplyController {
 	public ResponseEntity<ReplyResponseDto> saveReply(@RequestBody SaveReplyRequestDto dto, @PathVariable Long commentId) {
 		ReplyResponseDto responseDto = replyService.saveReply(dto, commentId);
 		return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+	}
+
+	@GetMapping("/todos/comments/replies")
+	public ResponseEntity<List<ReplyResponseDto>> findAllReply() {
+		List<ReplyResponseDto> responseDtoList = replyService.findAllReply();
+		return new ResponseEntity<>(responseDtoList, HttpStatus.OK);
 	}
 
 	@PatchMapping("/todos/comments/replies/{replyId}")

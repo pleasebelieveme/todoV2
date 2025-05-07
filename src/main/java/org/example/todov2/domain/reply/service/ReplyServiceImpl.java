@@ -1,5 +1,9 @@
 package org.example.todov2.domain.reply.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
 import org.example.todov2.domain.comment.entity.Comment;
 import org.example.todov2.domain.comment.repository.CommentRepository;
 import org.example.todov2.domain.member.entity.Member;
@@ -34,6 +38,12 @@ public class ReplyServiceImpl implements ReplyService {
 		Reply reply = new Reply(dto.getContents(), findMember, findTodo, findComment);
 		Reply saved = replyRepository.save(reply);
 		return ReplyResponseDto.toDto(saved);
+	}
+
+	@Override
+	public List<ReplyResponseDto> findAllReply() {
+		List<Reply> findReplyList = replyRepository.findAll();
+		return findReplyList.stream().map(ReplyResponseDto::toDto).collect(Collectors.toList());
 	}
 
 	@Override
