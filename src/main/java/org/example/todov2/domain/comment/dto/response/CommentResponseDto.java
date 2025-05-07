@@ -18,22 +18,19 @@ import lombok.Getter;
 public class CommentResponseDto {
 	private final Long id;
 	private final String contents;
-	private final MemberResponseDto member;
 	private final TodoResponseDto todo;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;
 
-	public CommentResponseDto(Long id, String contents, MemberResponseDto member, TodoResponseDto todo) {
+	public CommentResponseDto(Long id, String contents, TodoResponseDto todo) {
 		this.id = id;
 		this.contents = contents;
-		this.member = member;
 		this.todo = todo;
 	}
 
-	public CommentResponseDto(Long id, String contents, MemberResponseDto member, TodoResponseDto todo, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+	public CommentResponseDto(Long id, String contents, TodoResponseDto todo, LocalDateTime createdAt, LocalDateTime modifiedAt) {
 		this.id = id;
 		this.contents = contents;
-		this.member = member;
 		this.todo = todo;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
@@ -44,7 +41,6 @@ public class CommentResponseDto {
 		return CommentResponseDto.builder()
 			.id(comment.getId())
 			.contents(comment.getContents())
-			.member(MemberResponseDto.toDto(comment.getMember()))
 			.todo(TodoResponseDto.toDto(comment.getTodo()))
 			.build();
 	}

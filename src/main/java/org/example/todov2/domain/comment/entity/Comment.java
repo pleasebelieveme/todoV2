@@ -64,11 +64,6 @@ public class Comment extends BaseEntity {
 		return new CommentResponseDto(
 			this.id,
 			this.contents,
-			new MemberResponseDto(
-				this.member.getId(),
-				this.member.getName(),
-				this.member.getEmail()
-			),
 			new TodoResponseDto(
 				this.todo.getId(),
 				this.todo.getTitle(),
