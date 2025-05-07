@@ -2,8 +2,10 @@ package org.example.todov2.domain.todo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.example.todov2.common.BaseEntity;
+import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
 import org.example.todov2.domain.comment.entity.Comment;
 import org.example.todov2.domain.member.dto.response.MemberResponseDto;
 import org.example.todov2.domain.member.entity.Member;
@@ -66,7 +68,15 @@ public class Todo extends BaseEntity {
 				this.member.getId(),
 				this.member.getName(),
 				this.member.getEmail()
-		));
+			),
+			this.comments.stream()
+				.map(comment -> new CommentResponseDto(
+					comment.getId(),
+					comment.getContents(),
+					null
+				))
+				.collect(Collectors.toList())
+		);
 	}
 
 	public void update(String title, String contents) {

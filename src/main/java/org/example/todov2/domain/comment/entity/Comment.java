@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.example.todov2.common.BaseEntity;
 import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
-import org.example.todov2.domain.member.dto.response.MemberResponseDto;
 import org.example.todov2.domain.reply.entity.Reply;
 import org.example.todov2.domain.member.entity.Member;
-import org.example.todov2.domain.todo.dto.response.TodoResponseDto;
 import org.example.todov2.domain.todo.entity.Todo;
 
 import jakarta.persistence.CascadeType;
@@ -64,15 +62,7 @@ public class Comment extends BaseEntity {
 		return new CommentResponseDto(
 			this.id,
 			this.contents,
-			new TodoResponseDto(
-				this.todo.getId(),
-				this.todo.getTitle(),
-				this.todo.getContents(),
-				new MemberResponseDto(
-					this.member.getId(),
-					this.member.getName(),
-					this.member.getEmail()
-				)));
+			null);
 	}
 
 	public void updateReview(String contents) {

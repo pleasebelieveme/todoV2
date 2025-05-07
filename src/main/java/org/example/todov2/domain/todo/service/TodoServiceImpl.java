@@ -1,9 +1,11 @@
 package org.example.todov2.domain.todo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.example.todov2.domain.comment.dto.response.CommentResponseDto;
 import org.example.todov2.domain.member.dto.request.SaveMemberRequestDto;
 import org.example.todov2.domain.member.dto.response.MemberResponseDto;
 import org.example.todov2.domain.member.entity.Member;
@@ -38,7 +40,9 @@ public class TodoServiceImpl implements TodoService {
 				savedTodo.getMember().getId(),
 				savedTodo.getMember().getName(),
 				savedTodo.getMember().getEmail()
-			));
+			),
+			new ArrayList<>()
+		);
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public TodoResponseDto findTodoById(Long todoId) {
 		Todo findTodo = todoRepository.findTodoByIdOrElseThrow(todoId);
-		return new TodoResponseDto(findTodo.getId(), findTodo.getTitle(), findTodo.getContents(), findTodo.toDto().getMember(), findTodo.getCreatedAt(), findTodo.getModifiedAt());
+		return TodoResponseDto.toDto(findTodo);
 	}
 
 	@Override
