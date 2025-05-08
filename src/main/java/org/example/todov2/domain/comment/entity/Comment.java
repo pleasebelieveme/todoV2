@@ -61,8 +61,8 @@ public class Comment extends BaseEntity {
 	public CommentResponseDto toDto() {
 		return new CommentResponseDto(
 			this.id,
-			this.contents,
-			null);
+			this.contents
+			);
 	}
 
 	public void updateReview(String contents) {

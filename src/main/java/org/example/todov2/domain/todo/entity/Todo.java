@@ -72,8 +72,7 @@ public class Todo extends BaseEntity {
 			this.comments.stream()
 				.map(comment -> new CommentResponseDto(
 					comment.getId(),
-					comment.getContents(),
-					null
+					comment.getContents()
 				))
 				.collect(Collectors.toList())
 		);

@@ -47,7 +47,7 @@ public class TodoServiceImpl implements TodoService {
 
 	@Override
 	public List<TodoResponseDto> findAllTodos() {
-		List<Todo> todoList = todoRepository.findAll();
+		List<Todo> todoList = todoRepository.findAllWithCommentsOrderByCommentCreatedAt();
 		return todoList.stream().map(Todo::toDto).collect(Collectors.toList());
 	}
 
