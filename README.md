@@ -1,7 +1,7 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=250&section=header&text=TODO_V2%20Project&fontSize=80)
 
 ## 🤔 개요
-- 이 프로젝트는 스프링부트와 JPA를 사용해 회원 CRUD, 일정 CRUD, 회원 로그인 인증을 구현한 애플리케이션입니다.
+- 이 프로젝트는 스프링부트와 JPA를 사용해 회원 C, 일정 CRUD, 댓글 CRUD, 대댓글 CRUD를 구현한 애플리케이션입니다.
 
 ##  🌳 개발환경
 언어 : ![Static Badge](https://img.shields.io/badge/Java-red?style=flat-square)
